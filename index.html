@@ -2230,7 +2230,10 @@ function apiBookmarklet(C){
         if(!r.ok)throw new Error('API trả lỗi '+r.status+(r.status===401?' — hãy đăng nhập lại.':''));
         const raw=await r.text();let J=null;try{J=JSON.parse(raw)}catch(e){}return{raw,st:r.status,list:(J&&J.data)||[]};
       };
-      let R=await getL(C.pid);
+      let R=null;
+      /* Đã biết mã đơn vị của xã (C.cid): lấy thẳng danh sách con, bỏ lần gọi toàn tỉnh (nhanh gấp đôi); sai thì quay về cách cũ */
+      if(C.cid){try{const X=await getL(C.cid);if(X.list.length&&!X.list.some(x=>/tỉnh Lào Cai/i.test(String(x.tenDonVi||''))||String(x.tenDonVi||'').trim()===C.name))R=X}catch(e){}}
+      if(!R)R=await getL(C.pid);
       if(!R.list.length){/* trả rỗng: chờ 2 giây thử lại 1 lần (có thể do máy chủ vừa làm mới phiên) */
         await new Promise(r2=>setTimeout(r2,2000));R=await getL(C.pid)}
       const tB=performance.now();
@@ -2303,7 +2306,7 @@ function apiBookmarklet(C){
   window.__dpBmBusy=true;
   go(false).finally(()=>{window.__dpBmBusy=false;badge(hm())});
 }
-function apiBmSrc(){return '('+apiBookmarklet.toString()+')('+JSON.stringify({pid:2122408,name:'Đảng bộ xã Bảo Yên',max:0,k:'by_apipw',src:'website-bao-yen-api',m:true,ep:(sheetEndpoint())||''})+');void 0'}
+function apiBmSrc(){return '('+apiBookmarklet.toString()+')('+JSON.stringify({pid:2122408,cid:2124809,name:'Đảng bộ xã Bảo Yên',max:0,k:'by_apipw',src:'website-bao-yen-api',m:true,ep:(sheetEndpoint())||''})+');void 0'}
 (function(){
   const a=document.getElementById('apiBm'),c=document.getElementById('apiCopy'),cj=document.getElementById('apiCopyJs'),m=document.getElementById('apiMsg');if(!a)return;
   const say=t=>{m.hidden=false;m.textContent=t};
