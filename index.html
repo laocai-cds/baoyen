@@ -4085,7 +4085,7 @@ const D=[
  li:['<b>Xanh:</b> môi trường sạch đẹp, cảnh quan xanh, sản xuất an toàn, bảo vệ rừng và nguồn nước.','<b>Hài hòa:</b> phát triển kinh tế đi cùng giữ gìn văn hóa, đoàn kết giữa các thôn, bản và dân tộc.','<b>Hạnh phúc:</b> đời sống vật chất, tinh thần ngày càng nâng cao; người dân hài lòng, an tâm sinh sống.','<b>Đảng bộ vững mạnh:</b> chi bộ, đảng viên giữ vai trò hạt nhân, nêu gương trong xây dựng nông thôn mới.'],
  m:'Xanh – Hài hòa – Hạnh phúc'}];
 const $=s=>M.querySelector(s);let cur=0,last=null;
-function show(i){cur=(i+D.length)%D.length;const d=D[cur];
+function show(i){cur=(i+D.length)%D.length;const d=D[cur];const mm=M.querySelector('.modal.qsm');if(mm)mm.dataset.th=cur;
  $('#qsIc').innerHTML=IC[d.ic];$('#qsKick').textContent='Xã Bảo Yên · '+(cur+1)+'/'+D.length;$('#qsTitle').textContent=d.t;
  $('#qsLede').textContent=d.lede;$('#qsList').innerHTML=d.li.map(x=>'<li>'+x+'</li>').join('');
  $('#qsMotto').textContent='“'+d.m+'”';
@@ -4175,6 +4175,24 @@ html body .qs-i:nth-child(4) .qs-ic,html body .qs-i:nth-child(4):hover .qs-ic,ht
 html body .qs-i:hover .qs-ic,html body .qs-i:focus-visible .qs-ic{transform:scale(1.12)!important;color:#fff!important;box-shadow:0 0 0 2px #fff,0 .5cqw 1.2cqw rgba(0,0,0,.45)!important}
 html body .qs-i:hover,html body .qs-i:focus-visible{background:transparent!important;box-shadow:none!important}
 html body .qs-i:hover .qs-tx,html body .qs-i:focus-visible .qs-tx{color:#fff!important}
+</style>
+<style id="qsModalTheme">
+/* Màu popup theo màu 4 nút: đỏ / vàng cam / xanh dương / xanh lá */
+html body .modal.qsm[data-th="0"]{--qc:#c8102e;--qd:#8f0b21;--qt:#fdecee;--qb:#f3c6cd;--ql:#fff7f8}
+html body .modal.qsm[data-th="1"]{--qc:#d98e04;--qd:#8a5a00;--qt:#fff6e0;--qb:#f1dca8;--ql:#fffbf0}
+html body .modal.qsm[data-th="2"]{--qc:#1f6fb5;--qd:#134b7d;--qt:#e8f2fb;--qb:#c3dcf2;--ql:#f5faff}
+html body .modal.qsm[data-th="3"]{--qc:#2e9b5a;--qd:#1b6b3a;--qt:#eaf7ef;--qb:#bfe3cc;--ql:#f6fbf8}
+html body .modal.qsm{border-top-color:var(--qc,#2e9b5a)!important}
+html body .modal.qsm .qsm-head{background:linear-gradient(135deg,var(--qt,#eaf7ef),#fff 70%)!important}
+html body .modal.qsm .qsm-ic{background:var(--qc)!important;box-shadow:0 0 0 2px #fff,0 0 0 4px var(--qc),0 6px 16px -6px var(--qc)!important}
+html body .modal.qsm .qsm-head small,html body .modal.qsm .qsm-foot #qsMotto{color:var(--qd)!important}
+html body .modal.qsm .qsm-head h3,html body .modal.qsm .qsm-list li b,html body .modal.qsm .qsm-foot a,html body .modal.qsm .qsm-nav button{color:var(--qd)!important}
+html body .modal.qsm .qsm-x:hover,html body .modal.qsm .qsm-nav button:hover{background:var(--qt)!important;color:var(--qd)!important;border-color:var(--qb)!important}
+html body .modal.qsm .qsm-nav button{border-color:var(--qb)!important}
+html body .modal.qsm .qsm-list li{background:var(--ql)!important;border-color:var(--qb)!important}
+html body .modal.qsm .qsm-list li::before{background-color:var(--qc)!important}
+html body .modal.qsm #qsDots i{background:var(--qb)!important}
+html body .modal.qsm #qsDots i.on{background:var(--qc)!important}
 </style>
 </body>
 </html>
