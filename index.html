@@ -4201,5 +4201,15 @@ html body .qs-i:nth-child(2){--cx:15.5%!important}
 html body .qs-i:nth-child(3){--cx:24%!important}
 html body .qs-i:nth-child(4){--cx:32.5%!important}
 </style>
+<style id="sunRays">
+/* Tia nắng chiếu xuống từ góc phải trên banner (bản thử) */
+html body .scenic::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;mix-blend-mode:screen;transform-origin:100% 0;
+background:
+radial-gradient(circle at 100% 0,rgba(255,248,214,.85) 0,rgba(255,236,170,.45) 6%,rgba(255,236,170,0) 28%),
+conic-gradient(from 180deg at 100% 0,transparent 0 2deg,rgba(255,244,200,.34) 5deg,transparent 9deg,transparent 12deg,rgba(255,244,200,.26) 16deg,transparent 20deg,transparent 24deg,rgba(255,244,200,.38) 28deg,transparent 33deg,transparent 37deg,rgba(255,244,200,.22) 41deg,transparent 45deg,transparent 50deg,rgba(255,244,200,.28) 54deg,transparent 59deg,transparent 360deg);
+-webkit-mask-image:radial-gradient(ellipse 100% 150% at 100% 0,#000 0,rgba(0,0,0,.8) 45%,transparent 85%);mask-image:radial-gradient(ellipse 100% 150% at 100% 0,#000 0,rgba(0,0,0,.8) 45%,transparent 85%);
+animation:sunSway 9s ease-in-out infinite alternate}
+@keyframes sunSway{0%{transform:rotate(-1.6deg) scale(1.06);opacity:.75}100%{transform:rotate(1.6deg) scale(1.06);opacity:1}}
+</style>
 </body>
 </html>
