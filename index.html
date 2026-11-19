@@ -2933,16 +2933,16 @@ document.addEventListener('click',function(e){const t=e.target;if(!t||!t.closest
 document.addEventListener('keydown',function(e){const o=ov();if(e.key==='Escape'&&o&&o.classList.contains('on'))closeMkt()});
 })();
 </script>
-<div class="lnk-ov" id="lnkOv" role="dialog" aria-modal="true" aria-label="Liên kết website"><div class="lnk-box"><button class="lnk-x" id="lnkX" type="button" aria-label="Đóng">✕</button><h3>Liên kết website</h3><p class="lnk-sub">Danh sách lấy từ mục “Trang web các đơn vị” của DVC Lào Cai (TTHC), tự cập nhật. Bấm để mở ở tab mới.</p><a class="lnk-ban" href="https://baoyen.laocai.gov.vn/" target="_blank" rel="noopener noreferrer" title="Cổng thông tin điện tử xã Bảo Yên"><img src="cong-bao-yen.jpg" alt="Cổng thông tin điện tử xã Bảo Yên" loading="lazy" width="1537" height="216"></a><div class="lnk-grid" id="lnkGrid"></div></div></div>
+<div class="lnk-ov" id="lnkOv" role="dialog" aria-modal="true" aria-label="Liên kết website"><div class="lnk-box"><button class="lnk-x" id="lnkX" type="button" aria-label="Đóng">✕</button><h3>Liên kết website</h3><p class="lnk-sub">Danh sách lấy từ mục “Trang web các đơn vị” của DVC Lào Cai (TTHC), tự cập nhật. Bấm để mở ở tab mới.</p><a class="lnk-ban" href="https://baoyen.laocai.gov.vn/" target="_blank" rel="noopener noreferrer" title="Cổng thông tin điện tử xã Bảo Yên"><img src="cong-bao-yen.jpg?v=2" alt="Cổng thông tin điện tử xã Bảo Yên" loading="lazy" width="1537" height="226"></a><div class="lnk-grid" id="lnkGrid"></div></div></div>
 <script>
 (function(){
 /* Danh sách liên kết: thêm/sửa tại đây, mỗi dòng [tên hiển thị, địa chỉ] */
 /* Nguồn: danh sách “Trang web các đơn vị” của site DVC Lào Cai (TTHC) – Google Sheet “link website”, đọc qua Apps Script */
 var API='https://script.google.com/macros/s/AKfycbzbbPi7NVH9Ks9zhiyMKAO7hJwUwQYmx8nV05fkRpIhA7r7B5toOymgEuM3VCwe0bWWAg/exec',LS='by_units';
 var FALLBACK=[['Đảng bộ xã Bảo Thắng','baothang'],['Đảng bộ xã Lương Thịnh','luongthinh'],['Đảng bộ xã Phình Hồ','phinhho'],['Đảng bộ xã Trạm Tấu','tramtau'],['Đảng bộ xã Võ Lao','volao']].map(function(x){return{name:x[0],url:'https://laocai-cds.github.io/'+x[1]+'/'}});
-var list=FALLBACK.slice();
+var list=clean(FALLBACK);
 function fold(t){return String(t).normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/đ/gi,"d")}
-function clean(l){return(Array.isArray(l)?l:[]).map(function(u){return{name:String(u&&u.name||'').trim(),url:String(u&&u.url||'').trim()}}).filter(function(u){return u.name&&/^https?:\/\//i.test(u.url)})}
+function clean(l){return(Array.isArray(l)?l:[]).map(function(u){return{name:String(u&&u.name||'').trim(),url:String(u&&u.url||'').trim()}}).filter(function(u){return u.name&&/^https?:\/\//i.test(u.url)&&!/xuanquang\.laocai\.gov\.vn/i.test(u.url)})}
 try{var c=JSON.parse(localStorage.getItem(LS)||'null');if(Array.isArray(c)&&c.length)list=clean(c)}catch(_){}
 function esc(t){return String(t).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 var AI_CARD='<a class="lnk-card" href="https://laocai-cds.github.io/tthc/?ai=1" target="_blank" rel="noopener noreferrer"><i>🤖</i><span><b>Trợ lý AI TTHC</b><small>Hỏi đáp, tra cứu số liệu thủ tục hành chính (site DVC Lào Cai)</small></span></a>';
